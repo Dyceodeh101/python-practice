@@ -18,10 +18,14 @@ while True:
     if operation.lower() == 'exit':
         print("Exiting the calculator. Goodbye!")
         break
-    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
+    print("DEBUG: operation was", operation)
 
-    
+    try:
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+    except ValueError:
+        print("Please enter valid numbers.")
+        continue
+
     result = calculate(num1, num2, operation)
     print("Result:", result)
