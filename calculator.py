@@ -5,6 +5,8 @@ def calculate(num1, num2, operator):
         return num1 - num2
     elif operator == '*':
         return num1 * num2
+    elif operator == '^':
+        return num1 ** num2
     elif operator == '/':
         if num2 != 0:
             return num1 / num2
@@ -13,11 +15,20 @@ def calculate(num1, num2, operator):
     else:
         return "Error: Invalid operator"
 
+
+history = []
+
+
 while True:
-    operation = input("Enter operation (+,-,*,/) or 'exit' to quit: ")
+    operation = input("Enter operation (+,-,*,^,/), 'history' to view history', or 'exit' to quit: ")
     if operation.lower() == 'exit':
         print("Exiting the calculator. Goodbye!")
         break
+    if operation.lower() == 'history':
+        print("Calculation History:")
+        for entry in history:
+            print(entry)
+        continue
     print("DEBUG: operation was", operation)
 
     try:
@@ -28,4 +39,8 @@ while True:
         continue
 
     result = calculate(num1, num2, operation)
+
+    entry = f"{num1} {operation} {num2} = {result}"
+    history.append(entry)
+    
     print("Result:", result)
