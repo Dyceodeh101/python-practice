@@ -20,15 +20,15 @@ history = []
 
 
 while True:
-    operation = input("Enter operation (+,-,*,^,/), 'history' to view history', 'clear' to clear history, or 'exit' to quit: ")
-    if operation.lower() == 'exit':
+    user_input = input("Enter calculation, 'history', 'clear', or 'exit': ").strip()
+    if user_input.lower() == 'exit':
         print("Exiting the calculator. Goodbye!")
         break
-    if operation.lower() == 'clear':
+    if user_input.lower() == 'clear':
         history.clear()
         print("History cleared.")
         continue
-    if operation.lower() == 'history':
+    if user_input.lower() == 'history':
         if not history:
             print("No calculations yet.")
         else:
@@ -36,13 +36,24 @@ while True:
             for entry in history:
                 print(entry)
         continue
-    print("DEBUG: operation was", operation)
 
-    try:
-        num1 = float(input("Enter the first number: "))
-        num2 = float(input("Enter the second number: "))
-    except ValueError:
-        print("Please enter valid numbers.")
+    expr = user_input
+    for op in ['+', '-', '*', '/', '^']:
+        expr = expr.replace(op, f' {op} ')
+
+    parts = expr.split()
+
+    if len(parts) != 3:
+        print("Invalid input format. Please enter in the format: number operator number (e.g., 2 + 3).")
+        continue
+
+    
+    num1 = float(parts[0])
+    operation = parts[1]
+    num2 = float(parts[2])
+    
+    if operation not in ['+', '-', '*', '/', '^']:
+        print("Invalid operator. Please use one of the following: +, -, *, /, ^.")
         continue
 
     result = calculate(num1, num2, operation)
