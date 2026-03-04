@@ -29,9 +29,12 @@ while True:
         print("History cleared.")
         continue
     if operation.lower() == 'history':
-        print("Calculation History:")
-        for entry in history:
-            print(entry)
+        if not history:
+            print("No calculations yet.")
+        else:
+            print("Calculation History:")
+            for entry in history:
+                print(entry)
         continue
     print("DEBUG: operation was", operation)
 
