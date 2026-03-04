@@ -20,10 +20,14 @@ history = []
 
 
 while True:
-    operation = input("Enter operation (+,-,*,^,/), 'history' to view history', or 'exit' to quit: ")
+    operation = input("Enter operation (+,-,*,^,/), 'history' to view history', 'clear' to clear history, or 'exit' to quit: ")
     if operation.lower() == 'exit':
         print("Exiting the calculator. Goodbye!")
         break
+    if operation.lower() == 'clear':
+        history.clear()
+        print("History cleared.")
+        continue
     if operation.lower() == 'history':
         print("Calculation History:")
         for entry in history:
@@ -42,5 +46,5 @@ while True:
 
     entry = f"{num1} {operation} {num2} = {result}"
     history.append(entry)
-    
+
     print("Result:", result)
